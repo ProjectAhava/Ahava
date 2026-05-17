@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let mounted = true
-    setLoading(true)
+    setLoading(false)
 
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!mounted) return
@@ -53,7 +53,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (mounted) setProfile(null)
         }
       }
-      if (mounted) setLoading(false)
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
@@ -73,7 +72,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setProfile(null)
         if (mounted) reset()
       }
-      if (mounted) setLoading(false)
     })
 
     return () => {

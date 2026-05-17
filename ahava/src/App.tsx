@@ -26,15 +26,12 @@ function LoadingScreen() {
 }
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth()
-  if (loading) return <LoadingScreen />
+  const { user } = useAuth()
   if (!user) return <Navigate to="/auth" replace />
   return <>{children}</>
 }
 
 function AppRoutes() {
-  const { loading } = useAuth()
-
   return (
     <Routes>
       <Route path="/auth" element={<AuthPage />} />
