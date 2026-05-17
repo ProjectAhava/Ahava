@@ -46,8 +46,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
 
       if (session?.user) {
-        const profile = await upsertProfile(session.user.id, session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string })
-        if (mounted) setProfile(profile)
+        try {
+          const profile = await upsertProfile(session.user.id, session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string })
+          if (mounted) setProfile(profile)
+        } catch {
+          if (mounted) setProfile(null)
+        }
       }
       if (mounted) setLoading(false)
     })
@@ -59,8 +63,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
 
       if (session?.user) {
-        const profile = await upsertProfile(session.user.id, session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string })
-        if (mounted) setProfile(profile)
+        try {
+          const profile = await upsertProfile(session.user.id, session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string })
+          if (mounted) setProfile(profile)
+        } catch {
+          if (mounted) setProfile(null)
+        }
       } else {
         setProfile(null)
         if (mounted) reset()

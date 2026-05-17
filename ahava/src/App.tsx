@@ -34,7 +34,6 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 
 function AppRoutes() {
   const { loading } = useAuth()
-  if (loading) return <LoadingScreen />
 
   return (
     <Routes>
