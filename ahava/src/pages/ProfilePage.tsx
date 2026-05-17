@@ -119,7 +119,18 @@ export function ProfilePage() {
       .select()
       .single()
 
-    if (error) { toast.error('Could not save profile'); setSaving(false); return }
+    if (error) {
+      toast.error('Could not save profile')
+      setSaving(false)
+      return
+    }
+
+    if (!data) {
+      toast.error('Profile update failed: no data returned')
+      setSaving(false)
+      return
+    }
+
     setProfile(data)
     setEditing(false)
     setSaving(false)
@@ -146,7 +157,7 @@ export function ProfilePage() {
                 <button
                   onClick={() => fileRef.current?.click()}
                   disabled={avatarUploading}
-                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#c8a97e] hover:bg-[#d4b990] text-[#0f1117] flex items-center justify-center shadow-lg transition-all disabled:opacity-60"
+                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#c8a97e] hover:bg-[#d4b990] text-[#0f1117] flex items-center justify-center shadow-lg transition-all disabled:opa[...]
                 >
                   {avatarUploading
                     ? <div className="w-3 h-3 border border-[#0f1117]/40 border-t-[#0f1117] rounded-full animate-spin" />
@@ -189,7 +200,7 @@ export function ProfilePage() {
                     onChange={e => setForm(p => ({ ...p, bio: e.target.value }))}
                     placeholder="A little about you..."
                     maxLength={200}
-                    className="bg-[#0f1117] border border-[#2a3347] rounded-xl px-3 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 resize-none h-20 transition-colors"
+                    className="bg-[#0f1117] border border-[#2a3347] rounded-xl px-3 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 resize-none h-2[...]
                   />
                   <p className="text-xs text-[#5a6178] text-right">{form.bio.length}/200</p>
                 </div>
