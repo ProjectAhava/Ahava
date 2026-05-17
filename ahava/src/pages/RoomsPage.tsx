@@ -60,12 +60,24 @@ export function RoomsPage() {
       return
     }
 
+    if (!data) {
+      toast.error('Room creation failed: no data returned')
+      setCreating(false)
+      return
+    }
+
     // Add creator as owner member
-    await supabase.from('room_members').insert({
+    const { error: memberError } = await supabase.from('room_members').insert({
       room_id: data.id,
       user_id: user.id,
       role: 'owner',
     })
+
+    if (memberError) {
+      toast.error('Room created but failed to add you as member')
+      setCreating(false)
+      return
+    }
 
     toast.success('Room created!')
     setShowCreate(false)
