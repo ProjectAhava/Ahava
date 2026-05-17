@@ -66,17 +66,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
 
       if (session?.user) {
-        const profile = await upsertProfile(
-          session.user.id,
-          session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string }
-        )
-        if (mounted) {
-          setProfile(profile)
-          setLoading(false)
-        }
-      } else {
-        if (mounted) setLoading(false)
+        try {
+          const profile = await upsertProfile(
+            session.user.id,
+            session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string }
+          )
+          if (mounted) setProfile(profile)
+        } catch (_) {}
       }
+      if (mounted) setLoading(false)
     })
 
     // Listen for auth state changes
@@ -87,20 +85,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
 
       if (session?.user) {
-        setLoading(true)
-        const profile = await upsertProfile(
-          session.user.id,
-          session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string }
-        )
-        if (mounted) {
-          setProfile(profile)
-          setLoading(false)
-        }
+        try {
+          const profile = await upsertProfile(
+            session.user.id,
+            session.user.user_metadata as { full_name?: string; name?: string; avatar_url?: string }
+          )
+          if (mounted) setProfile(profile)
+        } catch (_) {}
       } else {
         setProfile(null)
-        setLoading(false)
         if (event === 'SIGNED_OUT') reset()
       }
+      if (mounted) setLoading(false)
     })
 
     return () => {
