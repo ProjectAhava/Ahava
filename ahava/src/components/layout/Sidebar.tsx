@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { BookOpen, Home, Users, Bookmark, Search, LogOut, User, MessageSquare } from 'lucide-react'
+import { BookOpen, Home, Users, Bookmark, Search, LogOut } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { Avatar } from '@/components/ui/Avatar'
 
