@@ -73,7 +73,7 @@ export function AuthPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: `${window.location.origin}`,
         queryParams: { access_type: 'offline', prompt: 'consent' },
       },
     })
@@ -121,7 +121,7 @@ export function AuthPage() {
             <button
               onClick={handleGoogle}
               disabled={googleLoading}
-              className="w-full flex items-center justify-center gap-3 px-4 py-2.5 bg-[#1e2535] hover:bg-[#242d42] border border-[#2a3347] rounded-xl text-sm font-medium text-[#e8eaf0] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-3 px-4 py-2.5 bg-[#1e2535] hover:bg-[#242d42] border border-[#2a3347] rounded-xl text-sm font-medium text-[#e8eaf0] transition[...]
             >
               {googleLoading ? (
                 <div className="w-4 h-4 border-2 border-[#8b92a8]/30 border-t-[#8b92a8] rounded-full animate-spin" />
@@ -161,7 +161,7 @@ export function AuthPage() {
                     placeholder="Display name (optional)"
                     value={displayName}
                     onChange={e => setDisplayName(e.target.value)}
-                    className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 focus:ring-1 focus:ring-[#c8a97e]/15 transition-all"
+                    className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 foc[...]
                   />
                 </div>
               )}
@@ -174,7 +174,7 @@ export function AuthPage() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
-                  className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 focus:ring-1 focus:ring-[#c8a97e]/15 transition-all"
+                  className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 focus[...]
                 />
               </div>
 
@@ -187,7 +187,7 @@ export function AuthPage() {
                   onChange={e => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-10 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 focus:ring-1 focus:ring-[#c8a97e]/15 transition-all"
+                  className="w-full bg-[#0f1117] border border-[#2a3347] rounded-xl pl-9 pr-10 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 focu[...]
                 />
                 <button
                   type="button"
