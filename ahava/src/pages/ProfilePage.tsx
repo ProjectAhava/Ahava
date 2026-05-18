@@ -9,6 +9,14 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import toast from 'react-hot-toast'
 
+const styles = {
+  cameraButton: 'absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#c8a97e] hover:bg-[#d4b990] text-[#0f1117] flex items-center justify-center shadow-lg transition-all disabled:opacity-50',
+  spinnerSmall: 'w-3 h-3 border border-[#0f1117]/40 border-t-[#0f1117] rounded-full animate-spin',
+  textarea: 'bg-[#0f1117] border border-[#2a3347] rounded-xl px-3 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 resize-none h-24',
+  bioText: 'text-xs text-[#5a6178] text-right',
+  quickLinkButton: 'w-full flex items-center gap-3 px-5 py-4 hover:bg-[#1e2535] transition-colors text-left',
+}
+
 export function ProfilePage() {
   const { user, profile, signOut } = useAuth()
   const { setProfile } = useAuthStore()
@@ -157,10 +165,10 @@ export function ProfilePage() {
                 <button
                   onClick={() => fileRef.current?.click()}
                   disabled={avatarUploading}
-                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#c8a97e] hover:bg-[#d4b990] text-[#0f1117] flex items-center justify-center shadow-lg transition-all disabled:opa[...]
+                  className={styles.cameraButton}
                 >
                   {avatarUploading
-                    ? <div className="w-3 h-3 border border-[#0f1117]/40 border-t-[#0f1117] rounded-full animate-spin" />
+                    ? <div className={styles.spinnerSmall} />
                     : <Camera size={12} />
                   }
                 </button>
@@ -200,9 +208,9 @@ export function ProfilePage() {
                     onChange={e => setForm(p => ({ ...p, bio: e.target.value }))}
                     placeholder="A little about you..."
                     maxLength={200}
-                    className="bg-[#0f1117] border border-[#2a3347] rounded-xl px-3 py-2.5 text-sm text-[#e8eaf0] placeholder:text-[#5a6178] outline-none focus:border-[#c8a97e]/50 resize-none h-2[...]
+                    className={styles.textarea}
                   />
-                  <p className="text-xs text-[#5a6178] text-right">{form.bio.length}/200</p>
+                  <p className={styles.bioText}>{form.bio.length}/200</p>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" loading={saving} onClick={saveProfile}>
@@ -294,7 +302,7 @@ export function ProfilePage() {
           <button
             key={to}
             onClick={() => navigate(to)}
-            className={`w-full flex items-center gap-3 px-5 py-4 hover:bg-[#1e2535] transition-colors text-left ${i < arr.length - 1 ? 'border-b border-[#2a3347]' : ''}`}
+            className={`${styles.quickLinkButton} ${i < arr.length - 1 ? 'border-b border-[#2a3347]' : ''}`}
           >
             <Icon size={18} className={color} />
             <div className="flex-1">
